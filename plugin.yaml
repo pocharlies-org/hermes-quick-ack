@@ -1,0 +1,5 @@
+name: quick-ack
+version: 1.0.0
+description: "Acuse inmediato: una frase de un modelo rápido (prompt fijo y mínimo, sin SOUL ni MCP) mientras el turno normal trabaja. Texto y notas de voz."
+author: pocharlies-org
+kind: standalone
