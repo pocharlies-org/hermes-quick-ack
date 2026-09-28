@@ -38,6 +38,10 @@ REASONING_EFFORT = os.environ.get("QUICK_ACK_REASONING_EFFORT", "none")
 TIMEOUT_S = float(os.environ.get("QUICK_ACK_TIMEOUT_S") or 6)
 MIN_CHARS = int(os.environ.get("QUICK_ACK_MIN_CHARS") or 12)
 MAX_INPUT_CHARS = 1500
+# Plataformas de chat con acuse (coma); vacío = todas. Fuera webhook, api_server y cron: ahí
+# no hay nadie mirando el chat, o el acuse se colaría en la respuesta (voz de api_server).
+PLATFORMS = {p.strip().lower() for p in (os.environ.get(
+    "QUICK_ACK_PLATFORMS", "telegram,whatsapp,discord,slack,signal,matrix")).split(",") if p.strip()}
 # Perfiles con acuse (coma); vacío = todos.
 PROFILES = {p.strip() for p in (os.environ.get("QUICK_ACK_PROFILES") or "").split(",") if p.strip()}
 SKIP = "-"
@@ -117,6 +121,9 @@ def _wanted(gateway, source, text: str, check_busy: bool = True) -> bool:
     if len(text) < MIN_CHARS or text.startswith("/"):
         return False
     if getattr(source, "is_bot", False):
+        return False
+    platform = getattr(getattr(source, "platform", None), "value", getattr(source, "platform", "")) or ""
+    if PLATFORMS and str(platform).lower() not in PLATFORMS:
         return False
     if PROFILES and str(getattr(source, "profile", "") or "default") not in PROFILES:
         return False
