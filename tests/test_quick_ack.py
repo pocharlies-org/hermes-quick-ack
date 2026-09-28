@@ -65,6 +65,7 @@ class FakeGateway:
 
 
 def _event(text, kind="text", **src):
+    src.setdefault("platform", SimpleNamespace(value="telegram"))
     source = SimpleNamespace(chat_id="42", thread_id="7", profile=None, is_bot=False, **src)
     return SimpleNamespace(text=text, source=source, message_id="m1",
                            message_type=SimpleNamespace(value=kind))
@@ -138,6 +139,8 @@ def test_texto_envia_acuse_en_el_hilo_y_no_toca_el_mensaje(qa):
     ("ok", {}, {}, "Vale."),                                                 # demasiado corto
     ("mira por qué se reinicia litellm", {"authorized": False}, {}, "Vale."),
     ("mira por qué se reinicia litellm", {"busy": True}, {}, "Vale."),      # follow-up: busy_ack
+    ("mira por qué se reinicia litellm", {}, {"platform": SimpleNamespace(value="webhook")}, "Vale."),
+    ("mira por qué se reinicia litellm", {}, {"platform": SimpleNamespace(value="api_server")}, "Vale."),
 ])
 def test_casos_sin_acuse(qa, text, gw_kwargs, src, reply):
     gw = FakeGateway(**gw_kwargs)

@@ -25,6 +25,8 @@ hermes plugins install pocharlies-org/hermes-quick-ack --enable
 
 Reinicia el gateway.
 
+**Multi-perfil:** Hermes tiene un gestor de plugins por `HERMES_HOME`. Si usas perfiles (`~/.hermes/profiles/<nombre>`), tienes que instalar y habilitar el plugin **en cada perfil** que atienda chats. Si solo lo habilitas en el default, los chats enrutados a otro perfil no llevan acuse.
+
 ## Configuración (variables de entorno)
 
 | Variable | Por defecto | Qué hace |
@@ -36,6 +38,7 @@ Reinicia el gateway.
 | `QUICK_ACK_TIMEOUT_S` | `6` | Pasado este tiempo, el acuse ya no se envía |
 | `QUICK_ACK_MIN_CHARS` | `12` | Los mensajes más cortos no llevan acuse |
 | `QUICK_ACK_PROFILES` | *(todos)* | Perfiles con acuse, separados por comas |
+| `QUICK_ACK_PLATFORMS` | `telegram,whatsapp,discord,slack,signal,matrix` | Plataformas con acuse. Webhook, api_server y cron quedan fuera |
 | `QUICK_ACK_PROMPT_FILE` | — | Sustituye el prompt por defecto (en español, con ejemplos) |
 
 ## Caché de prefijo
