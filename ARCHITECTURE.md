@@ -32,7 +32,7 @@ El hook siempre devuelve `None`: nunca reescribe ni descarta el mensaje. Sin acu
 
 ## CI/CD y despliegue
 
-Sin CI propio (el clon solo trae los ficheros del plugin; el PR del estándar del 01-10 añade `duplicados.yml` y `pr-review.yml`). Instalación: `hermes plugins install pocharlies-org/hermes-quick-ack --enable` (o clonar en `~/.hermes/plugins/quick-ack` y añadirlo a `plugins.enabled`) y reiniciar el gateway. En la compañía, los plugins de Hermes se cambian por PR a `k8s-openclaw-qwen36-pocharlies`.
+Sin CI propio más allá de los workflows estándar de la org (`duplicados.yml` y `pr-review.yml`). Instalación: `hermes plugins install pocharlies-org/hermes-quick-ack --enable` (o clonar en `~/.hermes/plugins/quick-ack` y añadirlo a `plugins.enabled`) y reiniciar el gateway. En la compañía, los plugins de Hermes se cambian por PR a `k8s-openclaw-qwen36-pocharlies`.
 
 ## Decisiones y trampas
 
